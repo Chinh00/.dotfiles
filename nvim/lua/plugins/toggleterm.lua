@@ -32,7 +32,16 @@ return {
     vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Move to right window" })
     vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Move to lower window" })
     vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Move to upper window" })
+    local lazydocker = Terminal:new({
+      cmd = "lazydocker",
+      direction = "float",
+      hidden = true,
+      float_opts = { border = "rounded" }, -- border đẹp
+    })
 
+    vim.keymap.set("n", "<leader>dd", function()
+      lazydocker:toggle()
+    end, { noremap = true, silent = true, desc = "Open LazyDocker" })
     -- Đóng tất cả terminal
     function _close_all_terminals()
       for id, term in pairs(terminals) do
